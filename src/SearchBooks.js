@@ -45,7 +45,7 @@ class SearchBooks extends React.Component {
       			  <li key={book.id}>
                     <div className="book">
                       <div className="book-top">
-                      <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail })` }}></div>
+                      <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks ? book.imageLinks.thumbnail : "https://books.google.com/googlebooks/images/no_cover_thumb.gif" })` }}></div>
                         <div className="book-shelf-changer">
                           <select value={book.shelf} onChange={(event) => this.handleChange(event.target.value, index, book)}>
                             <option value="disabled" disabled>Move to...</option>
@@ -57,6 +57,9 @@ class SearchBooks extends React.Component {
                         </div>
                       </div>
                       <div className="book-title">{book.title}</div>
+											{!book.authors && (
+                      	<div className="book-authors">佚名</div>
+                  	  )}
                       {book.authors && book.authors.map((authors) => (
                       	<div className="book-authors" key={authors}>{authors}</div>
                   	  ))}
